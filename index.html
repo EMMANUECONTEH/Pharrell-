@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6756d8">
+<title>Pharrel Learns</title>
+<style>
+:root{--purple:#6756d8;--ink:#25264b;--muted:#6d7090;--paper:#fff;--bg:#f4f5ff;--green:#1e9b70;--yellow:#ffca58}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#f3f1ff,#f2fbff);font-family: "Trebuchet MS",Arial,sans-serif;color:var(--ink);min-height:100vh}
+button,select{font:inherit}button{cursor:pointer;border:0}
+header{max-width:1050px;margin:auto;padding:20px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:clamp(18px,3vw,26px)}.logo{width:48px;height:48px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 6px 18px #39317d18}
+.pill{background:#fff;padding:10px 14px;border-radius:999px;font-weight:800;box-shadow:0 5px 16px #39317d10}
+main{max-width:920px;margin:0 auto;padding:12px 18px 36px}
+.hero{text-align:center;padding:18px 10px 24px}.hero .mascot{font-size:64px;filter:drop-shadow(0 8px 6px #302b6420)}h1{font-size:clamp(30px,6vw,48px);margin:8px 0;color:#4237a4;line-height:1.1}.hero p{color:var(--muted);font-size:17px;margin:10px auto;max-width:540px;line-height:1.5}
+.panel{background:var(--paper);border-radius:26px;padding:clamp(18px,4vw,32px);box-shadow:0 15px 45px #39317d12;border:1px solid #ffffff}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 22px}
+.category{padding:18px 8px;border-radius:20px;background:#f7f6ff;border:2px solid transparent;color:var(--ink);font-weight:900;transition:.15s}.category span{display:block;font-size:35px;margin-bottom:7px}.category small{color:var(--muted);font-weight:600}.category.active{border-color:var(--purple);background:#eeebff;transform:translateY(-2px)}
+.levels{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 0}.levels label{font-weight:800}.levels select{border:2px solid #e4e3f7;border-radius:12px;padding:10px;background:white;color:var(--ink)}
+.primary{background:var(--purple);color:white;padding:15px 25px;border-radius:15px;font-weight:900;font-size:17px;box-shadow:0 7px 0 #4939ac}.primary:active{transform:translateY(3px);box-shadow:0 4px 0 #4939ac}
+.center{text-align:center}.hidden{display:none!important}.game-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}.progress{height:10px;background:#eeedfa;border-radius:99px;overflow:hidden;margin:12px 0 22px}.progress div{height:100%;width:0;background:linear-gradient(90deg,#7b6cf0,#38cba0);transition:width .3s}
+.round-label{font-weight:900;color:var(--muted)}.word-emoji{font-size:clamp(65px,13vw,100px);margin:5px 0 0}.word-title{font-size:clamp(28px,6vw,40px);font-weight:1000;margin:0 0 8px}.hint{color:var(--muted);margin:0 auto 18px;line-height:1.5}
+.sound-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 0}.sound{padding:11px 15px;border-radius:13px;background:#eaf8f3;color:#137b58;font-weight:900}
+.answer-area{max-width:550px;margin:20px auto}.letters{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:18px 0}.letter{width:43px;height:49px;border:2px dashed #c9c7e9;border-radius:12px;display:grid;place-items:center;font-size:24px;font-weight:900;background:#fbfaff}.letter.filled{border-style:solid;border-color:#7a6ce7;background:#f0edff}.letter-space{width:15px}
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px auto;max-width:550px}.choice{padding:15px 8px;border-radius:15px;background:#f4f3ff;border:2px solid #e9e7ff;font-weight:900;font-size:19px;color:var(--ink)}.choice:focus,.choice:hover{border-color:var(--purple)}
+.keypad{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:15px 0}.key{width:42px;height:43px;border-radius:11px;background:#fff1cf;font-size:20px;font-weight:900;color:#76500b}.key.delete{background:#ffe9ed;color:#ad3046;width:auto;padding:0 13px}.feedback{min-height:32px;font-weight:900;font-size:17px;margin:12px 0}.good{color:var(--green)}.bad{color:#d44b5e}.next{margin-top:5px}.tiny{font-size:13px;color:var(--muted);line-height:1.5;margin-top:22px}
+.results-emoji{font-size:74px}.score{font-size:42px;font-weight:1000;color:#4237a4;margin:6px}.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}.secondary{background:#eeebff;color:#4237a4;padding:14px 18px;border-radius:14px;font-weight:900}
+footer{text-align:center;color:var(--muted);padding:0 16px 25px;font-size:13px}
+@media(max-width:560px){.categories{grid-template-columns:repeat(2,1fr)}header{padding-top:14px}.brand{font-size:17px}.logo{width:40px;height:40px}.pill{font-size:13px;padding:9px 11px}.panel{border-radius:22px}.letter{width:35px;height:42px;font-size:20px}.key{width:36px;height:39px}.choices{gap:8px}.choice{font-size:17px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">🦁</div><span>Major's Spelling Adventure</span></div><div class="pill">⭐ Stars: <span id="stars">0</span></div></header>
+<main>
+<section id="home">
+ <div class="hero"><div class="mascot">🦁📚</div><h1>Learn it. Say it. Spell it!</h1><p>A fun word adventure for young learners. Listen to a word, learn how to say it, and spell it to earn stars!</p></div>
+ <div class="panel">
+  <h2 class="center">Choose your adventure</h2>
+  <div class="categories">
+   <button class="category active" data-cat="food"><span>🍎</span>Food Words<small>Yummy spelling!</small></button>
+   <button class="category" data-cat="animals"><span>🐘</span>Animals<small>Meet new friends!</small></button>
+   <button class="category" data-cat="school"><span>✏️</span>School<small>Ready to learn!</small></button>
+   <button class="category" data-cat="nature"><span>🌳</span>Nature<small>Explore outside!</small></button>
+   <button class="category" data-cat="home"><span>🏠</span>At Home<small>Everyday words!</small></button>
+   <button class="category" data-cat="mixed"><span>🎁</span>Surprise Mix<small>A bit of everything!</small></button>
+  </div>
+  <div class="levels"><label for="level">Choose a level:</label><select id="level"><option value="easy">Level 1 · Easy</option><option value="medium">Level 2 · Growing</option><option value="hard">Level 3 · Challenge</option></select></div>
+  <div class="center"><button class="primary" id="start">🚀 Start playing!</button></div>
+  <p class="tiny center">Tip for grown-ups: help children sound out each word. Pronunciations are played using your device's speech voice, so the accent may vary.</p>
+ </div>
+</section>
+<section id="game" class="hidden">
+ <div class="panel">
+  <div class="game-top"><button class="secondary" id="quit">← Categories</button><span class="round-label" id="round">Word 1 of 8</span><span class="pill">⭐ <span id="roundStars">0</span></span></div>
+  <div class="progress"><div id="bar"></div></div>
+  <div class="center"><div class="word-emoji" id="emoji">🍎</div><div class="word-title" id="wordTitle">Apple</div><p class="hint" id="hint">Listen carefully, then spell the word.</p>
+   <div class="sound-row"><button class="sound" id="hear">🔊 Hear the word</button><button class="sound" id="slow">🐢 Say it slowly</button></div>
+  </div>
+  <div id="spellMode" class="answer-area hidden"><p class="center"><b>Tap the letters in the right order:</b></p><div class="letters" id="letterSlots"></div><div class="keypad" id="keypad"></div></div>
+  <div id="choiceMode" class="answer-area hidden"><p class="center"><b>Which word did you hear?</b></p><div class="choices" id="choices"></div></div>
+  <div class="center"><div class="feedback" id="feedback" aria-live="polite"></div><button class="primary next hidden" id="next">Next word ➜</button></div>
+ </div>
+</section>
+<section id="results" class="hidden"><div class="panel center"><div class="results-emoji" id="resultEmoji">🏆</div><h1 id="resultTitle">Amazing work!</h1><p id="resultMessage">You finished your adventure.</p><div class="score"><span id="finalScore">0</span> ⭐</div><p id="scoreNote">Stars earned this round</p><div class="result-actions"><button class="primary" id="again">🔁 Play again</button><button class="secondary" id="homeBtn">🏡 Choose another category</button></div></div></section>
+</main>
+<footer>Made for curious minds · Ages 7–8 · Keep practising, little word explorer! 🌈</footer>
+<script>
+const BANK={
+ food:[
+  {w:"apple",e:"🍎",h:"A crunchy fruit. It starts with A."},{w:"bread",e:"🍞",h:"We can make a sandwich with it."},{w:"mango",e:"🥭",h:"A sweet, juicy fruit."},{w:"rice",e:"🍚",h:"A food often served with stew."},{w:"water",e:"💧",h:"We drink this to stay healthy."},{w:"banana",e:"🍌",h:"A long yellow fruit."},{w:"orange",e:"🍊",h:"A round citrus fruit."},{w:"carrot",e:"🥕",h:"An orange vegetable."},{w:"cheese",e:"🧀",h:"A food made from milk."},{w:"tomato",e:"🍅",h:"A red fruit used in many sauces."},{w:"potato",e:"🥔",h:"A vegetable that can become chips."},{w:"chicken",e:"🍗",h:"A bird and also a popular food."},{w:"pepper",e:"🫑",h:"A vegetable that can be green or red."},{w:"coconut",e:"🥥",h:"A hard-shelled tropical fruit."},{w:"pineapple",e:"🍍",h:"A spiky fruit with a sweet centre."}],
+ animals:[
+  {w:"cat",e:"🐱",h:"A pet that says meow."},{w:"dog",e:"🐶",h:"A pet that often says woof."},{w:"fish",e:"🐟",h:"An animal that lives in water."},{w:"bird",e:"🐦",h:"An animal with feathers."},{w:"frog",e:"🐸",h:"A green animal that can hop."},{w:"zebra",e:"🦓",h:"An animal with black and white stripes."},{w:"monkey",e:"🐒",h:"An animal that climbs trees."},{w:"rabbit",e:"🐰",h:"A fluffy animal with long ears."},{w:"elephant",e:"🐘",h:"A very large animal with a trunk."},{w:"giraffe",e:"🦒",h:"A tall animal with a long neck."},{w:"turtle",e:"🐢",h:"A slow animal with a shell."},{w:"dolphin",e:"🐬",h:"A clever sea mammal."}],
+ school:[
+  {w:"pen",e:"🖊️",h:"We use it to write."},{w:"book",e:"📘",h:"We read words and stories in it."},{w:"desk",e:"🪑",h:"A table where pupils work."},{w:"ruler",e:"📏",h:"We use it to measure or draw straight lines."},{w:"paper",e:"📄",h:"We can write or draw on it."},{w:"pencil",e:"✏️",h:"We write with it and can sharpen it."},{w:"teacher",e:"🧑‍🏫",h:"This person helps children learn."},{w:"school",e:"🏫",h:"A place where children learn."},{w:"eraser",e:"🧽",h:"It rubs out pencil marks."},{w:"lesson",e:"📚",h:"A time when we learn about a topic."}],
+ nature:[
+  {w:"sun",e:"☀️",h:"It shines in the daytime."},{w:"rain",e:"🌧️",h:"Water that falls from clouds."},{w:"tree",e:"🌳",h:"A tall plant with a trunk."},{w:"leaf",e:"🍃",h:"A green part of many plants."},{w:"flower",e:"🌸",h:"A colourful part of a plant."},{w:"river",e:"🏞️",h:"A natural stream of water."},{w:"cloud",e:"☁️",h:"A white or grey shape in the sky."},{w:"forest",e:"🌲",h:"A large area full of trees."},{w:"mountain",e:"⛰️",h:"A very high area of land."}],
+ home:[
+  {w:"bed",e:"🛏️",h:"We sleep on it."},{w:"cup",e:"🥤",h:"We drink from it."},{w:"door",e:"🚪",h:"We walk through it to enter a room."},{w:"chair",e:"🪑",h:"We sit on it."},{w:"table",e:"🪵",h:"We eat or work at it."},{w:"window",e:"🪟",h:"We can look outside through it."},{w:"pillow",e:"🛌",h:"We rest our head on it."},{w:"kitchen",e:"🍳",h:"A room where food is prepared."},{w:"blanket",e:"🧣",h:"It keeps us warm in bed."}]
+};
+const levels={easy:{max:4,mode:"choice"},medium:{max:6,mode:"spell"},hard:{max:10,mode:"spell"}};
+let category="food",questions=[],index=0,stars=0,earned=0,answered=false,usedWords=[];
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function say(word,slow=false){if(!("speechSynthesis"in window)){alert("Speech is not available in this browser. Try Chrome or another browser with text-to-speech.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(word);u.lang="en-GB";u.rate=slow?.58:.82;u.pitch=1.08;speechSynthesis.speak(u)}
+document.querySelectorAll(".category").forEach(b=>b.onclick=()=>{document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));b.classList.add("active");category=b.dataset.cat});
+function getWords(){let source=category==="mixed"?Object.values(BANK).flat():BANK[category];let max=levels[$("level").value].max;let filtered=source.filter(x=>x.w.length<=max);if(filtered.length<8)filtered=source;return shuffle(filtered).slice(0,8)}
+function show(which){["home","game","results"].forEach(id=>$(id).classList.toggle("hidden",id!==which));window.scrollTo({top:0,behavior:"smooth"})}
+$("start").onclick=()=>{questions=getWords();index=0;earned=0;show("game");renderQuestion();setTimeout(()=>say(questions[index].w),350)};
+$("quit").onclick=()=>show("home");
+function renderQuestion(){answered=false;let q=questions[index];$("round").textContent=`Word ${index+1} of ${questions.length}`;$("roundStars").textContent=earned;$("bar").style.width=(index/questions.length*100)+"%";$("emoji").textContent=q.e;$("wordTitle").textContent="Listen and learn!";$("hint").textContent=q.h;$("feedback").textContent="";$("feedback").className="feedback";$("next").classList.add("hidden");
+ let mode=levels[$("level").value].mode;$("spellMode").classList.toggle("hidden",mode!=="spell");$("choiceMode").classList.toggle("hidden",mode!=="choice");
+ if(mode==="spell"){ $("letterSlots").innerHTML="";[...q.w].forEach((ch,i)=>{let el=document.createElement("div");el.className=ch===" "?"letter-space":"letter";el.dataset.i=i;el.textContent="";$("letterSlots").append(el)});let chars=shuffle([...q.w.replace(/ /g,"")]);$("keypad").innerHTML="";chars.forEach((ch,i)=>{let b=document.createElement("button");b.className="key";b.textContent=ch.toUpperCase();b.onclick=()=>addLetter(ch,b);$("keypad").append(b)});let del=document.createElement("button");del.className="key delete";del.textContent="⌫ Undo";del.onclick=undoLetter;$("keypad").append(del);let check=document.createElement("button");check.className="key delete";check.textContent="✓ Check";check.onclick=checkSpelling;$("keypad").append(check);usedWords=[]}
+ else{let opts=shuffle([q,...shuffle(Object.values(BANK).flat().filter(x=>x.w!==q.w)).slice(0,3)]);$("choices").innerHTML="";opts.forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o.w.charAt(0).toUpperCase()+o.w.slice(1);b.onclick=()=>checkChoice(o.w,b);$("choices").append(b)})}
+}
+function addLetter(ch,btn){if(answered)return;let slots=[...$("letterSlots").querySelectorAll(".letter")];let empty=slots.find(x=>!x.textContent);if(!empty)return;empty.textContent=ch.toUpperCase();empty.classList.add("filled");empty.dataset.letter=ch;btn.disabled=true;btn.style.opacity=".35";usedWords.push({slot:empty,btn})}
+function undoLetter(){if(answered||!usedWords.length)return;let x=usedWords.pop();x.slot.textContent="";x.slot.classList.remove("filled");x.btn.disabled=false;x.btn.style.opacity="1"}
+function checkSpelling(){if(answered)return;let attempt=[...$("letterSlots").querySelectorAll(".letter")].map(x=>x.textContent.toLowerCase()).join("");if(attempt.length!==questions[index].w.length){feedback("Fill in every letter first!","bad");return}finishAnswer(attempt===questions[index].w,questions[index].w)}
+function checkChoice(word,btn){if(answered)return;document.querySelectorAll(".choice").forEach(b=>b.disabled=true);finishAnswer(word===questions[index].w,questions[index].w)}
+function feedback(msg,cls){$("feedback").textContent=msg;$("feedback").className="feedback "+cls}
+function finishAnswer(correct,word){answered=true;if(correct){earned+=10;stars+=10;$("stars").textContent=stars;feedback("🎉 Brilliant! That's correct. +10 stars!","good");$("wordTitle").textContent=word.charAt(0).toUpperCase()+word.slice(1);$("emoji").textContent="🌟"}else{feedback("Good try! The correct spelling is: "+word.toUpperCase(),"bad");$("wordTitle").textContent=word.charAt(0).toUpperCase()+word.slice(1)}$("roundStars").textContent=earned;$("bar").style.width=((index+1)/questions.length*100)+"%";$("next").textContent=index===questions.length-1?"See my score 🏆":"Next word ➜";$("next").classList.remove("hidden")}
+$("hear").onclick=()=>say(questions[index].w);$("slow").onclick=()=>say(questions[index].w,true);
+$("next").onclick=()=>{if(index<questions.length-1){index++;renderQuestion();setTimeout(()=>say(questions[index].w),250)}else finishGame()};
+function finishGame(){show("results");$("finalScore").textContent=earned;$("resultEmoji").textContent=earned>=60?"🏆":earned>=30?"🌟":"🦁";$("resultTitle").textContent=earned>=60?"Super Speller!":earned>=30?"Great effort!":"Keep going, word explorer!";$("resultMessage").textContent=earned>=60?"Wow! You are building brilliant spelling skills.":earned>=30?"Every word you practise helps your brain grow.":"Practice makes progress. Try again and see what you can learn!";$("scoreNote").textContent=`You earned ${earned} out of ${questions.length*10} possible stars.`}
+$("again").onclick=()=>{$("start").click()};$("homeBtn").onclick=()=>show("home");
+</script>
+</body>
+</html>
